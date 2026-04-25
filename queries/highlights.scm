@@ -126,6 +126,9 @@
 (expression_statement
   (identifier) @function.call .)
 
+(call_expression function: (identifier) @function.call)
+(call_expression function: (instance_type (identifier) @function.method.call))
+
 ; class/struct/enum names
 (class_header
   (identifier) @type)

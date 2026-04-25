@@ -109,6 +109,32 @@
           "type": "SEQ",
           "members": [
             {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "kw_extend"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "kw_mixin"
+                }
+              ]
+            },
+            {
+              "type": "SYMBOL",
+              "name": "kw_class"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "identifier"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
               "type": "SYMBOL",
               "name": "kw_class"
             },
@@ -145,32 +171,6 @@
               }
             }
           ]
-        },
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "kw_extend"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "kw_mixin"
-                }
-              ]
-            },
-            {
-              "type": "SYMBOL",
-              "name": "kw_class"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "identifier"
-            }
-          ]
         }
       ]
     },
@@ -179,19 +179,11 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "constant_definition"
-        },
-        {
-          "type": "SYMBOL",
           "name": "default_block"
         },
         {
           "type": "SYMBOL",
-          "name": "enumeration_definition"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "flag_definition"
+          "name": "state_block"
         },
         {
           "type": "SYMBOL",
@@ -203,11 +195,19 @@
         },
         {
           "type": "SYMBOL",
-          "name": "property_definition"
+          "name": "constant_definition"
         },
         {
           "type": "SYMBOL",
-          "name": "state_block"
+          "name": "enumeration_definition"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "flag_definition"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "property_definition"
         },
         {
           "type": "SYMBOL",
@@ -1498,62 +1498,12 @@
           ]
         },
         {
-          "type": "PREC_LEFT",
-          "value": 15,
-          "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "_expression"
-              },
-              {
-                "type": "STRING",
-                "value": "("
-              },
-              {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "SYMBOL",
-                    "name": "argument_list"
-                  },
-                  {
-                    "type": "BLANK"
-                  }
-                ]
-              },
-              {
-                "type": "STRING",
-                "value": ")"
-              }
-            ]
-          }
+          "type": "SYMBOL",
+          "name": "call_expression"
         },
         {
-          "type": "PREC_LEFT",
-          "value": 15,
-          "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "type"
-              },
-              {
-                "type": "STRING",
-                "value": "("
-              },
-              {
-                "type": "SYMBOL",
-                "name": "_expression"
-              },
-              {
-                "type": "STRING",
-                "value": ")"
-              }
-            ]
-          }
+          "type": "SYMBOL",
+          "name": "type_cast_expression"
         },
         {
           "type": "PREC_LEFT",
@@ -2644,6 +2594,76 @@
           }
         }
       ]
+    },
+    "call_expression": {
+      "type": "PREC_LEFT",
+      "value": 15,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "function",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_expression"
+            }
+          },
+          {
+            "type": "STRING",
+            "value": "("
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "argument_list"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "STRING",
+            "value": ")"
+          }
+        ]
+      }
+    },
+    "type_cast_expression": {
+      "type": "PREC_LEFT",
+      "value": 15,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "type",
+            "content": {
+              "type": "SYMBOL",
+              "name": "type"
+            }
+          },
+          {
+            "type": "STRING",
+            "value": "("
+          },
+          {
+            "type": "FIELD",
+            "name": "value",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_expression"
+            }
+          },
+          {
+            "type": "STRING",
+            "value": ")"
+          }
+        ]
+      }
     },
     "_statement": {
       "type": "CHOICE",
@@ -4796,509 +4816,1216 @@
       }
     },
     "kw_const": {
-      "type": "PATTERN",
-      "value": "const",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "const",
+          "flags": "i"
+        }
+      }
     },
     "kw_void": {
-      "type": "PATTERN",
-      "value": "void",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "void",
+          "flags": "i"
+        }
+      }
     },
     "kw_void_ptr": {
-      "type": "PATTERN",
-      "value": "voidPtr",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "voidPtr",
+          "flags": "i"
+        }
+      }
     },
     "kw_false": {
-      "type": "PATTERN",
-      "value": "false",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "false",
+          "flags": "i"
+        }
+      }
     },
     "kw_true": {
-      "type": "PATTERN",
-      "value": "true",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "true",
+          "flags": "i"
+        }
+      }
     },
     "kw_null": {
-      "type": "PATTERN",
-      "value": "null",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "null",
+          "flags": "i"
+        }
+      }
     },
     "kw_struct": {
-      "type": "PATTERN",
-      "value": "struct",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "struct",
+          "flags": "i"
+        }
+      }
     },
     "kw_double": {
-      "type": "PATTERN",
-      "value": "double",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "double",
+          "flags": "i"
+        }
+      }
     },
     "kw_float": {
-      "type": "PATTERN",
-      "value": "float",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "float",
+          "flags": "i"
+        }
+      }
     },
     "kw_float64": {
-      "type": "PATTERN",
-      "value": "float64",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "float64",
+          "flags": "i"
+        }
+      }
     },
     "kw_float32": {
-      "type": "PATTERN",
-      "value": "float32",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "float32",
+          "flags": "i"
+        }
+      }
     },
     "kw_int": {
-      "type": "PATTERN",
-      "value": "int",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "int",
+          "flags": "i"
+        }
+      }
     },
     "kw_uint": {
-      "type": "PATTERN",
-      "value": "uint",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "uint",
+          "flags": "i"
+        }
+      }
     },
     "kw_int16": {
-      "type": "PATTERN",
-      "value": "int16",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "int16",
+          "flags": "i"
+        }
+      }
     },
     "kw_uint16": {
-      "type": "PATTERN",
-      "value": "uint16",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "uint16",
+          "flags": "i"
+        }
+      }
     },
     "kw_int8": {
-      "type": "PATTERN",
-      "value": "int8",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "int8",
+          "flags": "i"
+        }
+      }
     },
     "kw_uint8": {
-      "type": "PATTERN",
-      "value": "uint8",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "uint8",
+          "flags": "i"
+        }
+      }
     },
     "kw_sbyte": {
-      "type": "PATTERN",
-      "value": "sbyte",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "sbyte",
+          "flags": "i"
+        }
+      }
     },
     "kw_byte": {
-      "type": "PATTERN",
-      "value": "byte",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "byte",
+          "flags": "i"
+        }
+      }
     },
     "kw_short": {
-      "type": "PATTERN",
-      "value": "short",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "short",
+          "flags": "i"
+        }
+      }
     },
     "kw_ushort": {
-      "type": "PATTERN",
-      "value": "ushort",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "ushort",
+          "flags": "i"
+        }
+      }
     },
     "kw_name": {
-      "type": "PATTERN",
-      "value": "name",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "name",
+          "flags": "i"
+        }
+      }
     },
     "kw_boolean": {
-      "type": "PATTERN",
-      "value": "bool",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "bool",
+          "flags": "i"
+        }
+      }
     },
     "kw_sprite_id": {
-      "type": "PATTERN",
-      "value": "spriteId",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "spriteId",
+          "flags": "i"
+        }
+      }
     },
     "kw_texture_id": {
-      "type": "PATTERN",
-      "value": "textureId",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "textureId",
+          "flags": "i"
+        }
+      }
     },
     "kw_sound": {
-      "type": "PATTERN",
-      "value": "sound",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "sound",
+          "flags": "i"
+        }
+      }
     },
     "kw_state_label": {
-      "type": "PATTERN",
-      "value": "stateLabel",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "stateLabel",
+          "flags": "i"
+        }
+      }
     },
     "kw_color": {
-      "type": "PATTERN",
-      "value": "color",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "color",
+          "flags": "i"
+        }
+      }
     },
     "kw_let": {
-      "type": "PATTERN",
-      "value": "let",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "let",
+          "flags": "i"
+        }
+      }
     },
     "kw_vector2": {
-      "type": "PATTERN",
-      "value": "vector2",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "vector2",
+          "flags": "i"
+        }
+      }
     },
     "kw_vector3": {
-      "type": "PATTERN",
-      "value": "vector3",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "vector3",
+          "flags": "i"
+        }
+      }
     },
     "kw_array": {
-      "type": "PATTERN",
-      "value": "array",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "array",
+          "flags": "i"
+        }
+      }
     },
     "kw_read_only": {
-      "type": "PATTERN",
-      "value": "readOnly",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "readOnly",
+          "flags": "i"
+        }
+      }
     },
     "kw_super": {
-      "type": "PATTERN",
-      "value": "super",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "super",
+          "flags": "i"
+        }
+      }
     },
     "kw_align_of": {
-      "type": "PATTERN",
-      "value": "alignOf",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "alignOf",
+          "flags": "i"
+        }
+      }
     },
     "kw_size_of": {
-      "type": "PATTERN",
-      "value": "sizeOf",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "sizeOf",
+          "flags": "i"
+        }
+      }
     },
     "kw_cross": {
-      "type": "PATTERN",
-      "value": "cross",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "cross",
+          "flags": "i"
+        }
+      }
     },
     "kw_dot": {
-      "type": "PATTERN",
-      "value": "dot",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "dot",
+          "flags": "i"
+        }
+      }
     },
     "kw_is": {
-      "type": "PATTERN",
-      "value": "is",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "is",
+          "flags": "i"
+        }
+      }
     },
     "kw_enum": {
-      "type": "PATTERN",
-      "value": "enum",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "enum",
+          "flags": "i"
+        }
+      }
     },
     "kw_flagdef": {
-      "type": "PATTERN",
-      "value": "flagDef",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "flagDef",
+          "flags": "i"
+        }
+      }
     },
     "kw_property": {
-      "type": "PATTERN",
-      "value": "property",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "property",
+          "flags": "i"
+        }
+      }
     },
     "kw_if": {
-      "type": "PATTERN",
-      "value": "if",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "if",
+          "flags": "i"
+        }
+      }
     },
     "kw_else": {
-      "type": "PATTERN",
-      "value": "else",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "else",
+          "flags": "i"
+        }
+      }
     },
     "kw_switch": {
-      "type": "PATTERN",
-      "value": "switch",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "switch",
+          "flags": "i"
+        }
+      }
     },
     "kw_case": {
-      "type": "PATTERN",
-      "value": "case",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "case",
+          "flags": "i"
+        }
+      }
     },
     "kw_default": {
-      "type": "PATTERN",
-      "value": "default",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "default",
+          "flags": "i"
+        }
+      }
     },
     "kw_native": {
-      "type": "PATTERN",
-      "value": "native",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "native",
+          "flags": "i"
+        }
+      }
     },
     "kw_clear_scope": {
-      "type": "PATTERN",
-      "value": "clearScope",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "clearScope",
+          "flags": "i"
+        }
+      }
     },
     "kw_play": {
-      "type": "PATTERN",
-      "value": "play",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "play",
+          "flags": "i"
+        }
+      }
     },
     "kw_private": {
-      "type": "PATTERN",
-      "value": "private",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "private",
+          "flags": "i"
+        }
+      }
     },
     "kw_protected": {
-      "type": "PATTERN",
-      "value": "protected",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "protected",
+          "flags": "i"
+        }
+      }
     },
     "kw_static": {
-      "type": "PATTERN",
-      "value": "static",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "static",
+          "flags": "i"
+        }
+      }
     },
     "kw_ui": {
-      "type": "PATTERN",
-      "value": "ui",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "ui",
+          "flags": "i"
+        }
+      }
     },
     "kw_internal": {
-      "type": "PATTERN",
-      "value": "internal",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "internal",
+          "flags": "i"
+        }
+      }
     },
     "kw_latent": {
-      "type": "PATTERN",
-      "value": "latent",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "latent",
+          "flags": "i"
+        }
+      }
     },
     "kw_transient": {
-      "type": "PATTERN",
-      "value": "transient",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "transient",
+          "flags": "i"
+        }
+      }
     },
     "kw_meta": {
-      "type": "PATTERN",
-      "value": "meta",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "meta",
+          "flags": "i"
+        }
+      }
     },
     "kw_action": {
-      "type": "PATTERN",
-      "value": "action",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "action",
+          "flags": "i"
+        }
+      }
     },
     "kw_final": {
-      "type": "PATTERN",
-      "value": "final",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "final",
+          "flags": "i"
+        }
+      }
     },
     "kw_override": {
-      "type": "PATTERN",
-      "value": "override",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "override",
+          "flags": "i"
+        }
+      }
     },
     "kw_var_arg": {
-      "type": "PATTERN",
-      "value": "varArg",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "varArg",
+          "flags": "i"
+        }
+      }
     },
     "kw_virtual": {
-      "type": "PATTERN",
-      "value": "virtual",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "virtual",
+          "flags": "i"
+        }
+      }
     },
     "kw_virtual_scope": {
-      "type": "PATTERN",
-      "value": "virtualScope",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "virtualScope",
+          "flags": "i"
+        }
+      }
     },
     "kw_for": {
-      "type": "PATTERN",
-      "value": "for",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "for",
+          "flags": "i"
+        }
+      }
     },
     "kw_foreach": {
-      "type": "PATTERN",
-      "value": "foreach",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "foreach",
+          "flags": "i"
+        }
+      }
     },
     "kw_while": {
-      "type": "PATTERN",
-      "value": "while",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "while",
+          "flags": "i"
+        }
+      }
     },
     "kw_until": {
-      "type": "PATTERN",
-      "value": "until",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "until",
+          "flags": "i"
+        }
+      }
     },
     "kw_do": {
-      "type": "PATTERN",
-      "value": "do",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "do",
+          "flags": "i"
+        }
+      }
     },
     "kw_continue": {
-      "type": "PATTERN",
-      "value": "continue",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "continue",
+          "flags": "i"
+        }
+      }
     },
     "kw_break": {
-      "type": "PATTERN",
-      "value": "break",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "break",
+          "flags": "i"
+        }
+      }
     },
     "kw_return": {
-      "type": "PATTERN",
-      "value": "return",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "return",
+          "flags": "i"
+        }
+      }
     },
     "kw_deprecated": {
-      "type": "PATTERN",
-      "value": "deprecated",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "deprecated",
+          "flags": "i"
+        }
+      }
     },
     "kw_actor": {
-      "type": "PATTERN",
-      "value": "actor",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "actor",
+          "flags": "i"
+        }
+      }
     },
     "kw_item": {
-      "type": "PATTERN",
-      "value": "item",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "item",
+          "flags": "i"
+        }
+      }
     },
     "kw_overlay": {
-      "type": "PATTERN",
-      "value": "overlay",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "overlay",
+          "flags": "i"
+        }
+      }
     },
     "kw_weapon": {
-      "type": "PATTERN",
-      "value": "weapon",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "weapon",
+          "flags": "i"
+        }
+      }
     },
     "kw_class": {
-      "type": "PATTERN",
-      "value": "class",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "class",
+          "flags": "i"
+        }
+      }
     },
     "kw_extend": {
-      "type": "PATTERN",
-      "value": "extend",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "extend",
+          "flags": "i"
+        }
+      }
     },
     "kw_mixin": {
-      "type": "PATTERN",
-      "value": "mixin",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "mixin",
+          "flags": "i"
+        }
+      }
     },
     "kw_abstract": {
-      "type": "PATTERN",
-      "value": "abstract",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "abstract",
+          "flags": "i"
+        }
+      }
     },
     "kw_replaces": {
-      "type": "PATTERN",
-      "value": "replaces",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "replaces",
+          "flags": "i"
+        }
+      }
     },
     "kw_version": {
-      "type": "PATTERN",
-      "value": "version",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "version",
+          "flags": "i"
+        }
+      }
     },
     "kw_damage_function": {
-      "type": "PATTERN",
-      "value": "DamageFunction",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "DamageFunction",
+          "flags": "i"
+        }
+      }
     },
     "kw_clear_flags": {
-      "type": "PATTERN",
-      "value": "ClearFlags",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "ClearFlags",
+          "flags": "i"
+        }
+      }
     },
     "kw_monster": {
-      "type": "PATTERN",
-      "value": "Monster",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "Monster",
+          "flags": "i"
+        }
+      }
     },
     "kw_projectile": {
-      "type": "PATTERN",
-      "value": "Projectile",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "Projectile",
+          "flags": "i"
+        }
+      }
     },
     "kw_states": {
-      "type": "PATTERN",
-      "value": "states",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "states",
+          "flags": "i"
+        }
+      }
     },
     "kw_goto": {
-      "type": "PATTERN",
-      "value": "goto",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "goto",
+          "flags": "i"
+        }
+      }
     },
     "kw_stop": {
-      "type": "PATTERN",
-      "value": "stop",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "stop",
+          "flags": "i"
+        }
+      }
     },
     "kw_loop": {
-      "type": "PATTERN",
-      "value": "loop",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "loop",
+          "flags": "i"
+        }
+      }
     },
     "kw_wait": {
-      "type": "PATTERN",
-      "value": "wait",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "wait",
+          "flags": "i"
+        }
+      }
     },
     "kw_fail": {
-      "type": "PATTERN",
-      "value": "fail",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "fail",
+          "flags": "i"
+        }
+      }
     },
     "kw_random": {
-      "type": "PATTERN",
-      "value": "random",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "random",
+          "flags": "i"
+        }
+      }
     },
     "kw_bright": {
-      "type": "PATTERN",
-      "value": "bright",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "bright",
+          "flags": "i"
+        }
+      }
     },
     "kw_fast": {
-      "type": "PATTERN",
-      "value": "fast",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "fast",
+          "flags": "i"
+        }
+      }
     },
     "kw_slow": {
-      "type": "PATTERN",
-      "value": "slow",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "slow",
+          "flags": "i"
+        }
+      }
     },
     "kw_no_delay": {
-      "type": "PATTERN",
-      "value": "noDelay",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "noDelay",
+          "flags": "i"
+        }
+      }
     },
     "kw_can_raise": {
-      "type": "PATTERN",
-      "value": "canRaise",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "canRaise",
+          "flags": "i"
+        }
+      }
     },
     "kw_offset": {
-      "type": "PATTERN",
-      "value": "offset",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "offset",
+          "flags": "i"
+        }
+      }
     },
     "kw_light": {
-      "type": "PATTERN",
-      "value": "light",
-      "flags": "i"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "light",
+          "flags": "i"
+        }
+      }
     }
   },
   "extras": [
