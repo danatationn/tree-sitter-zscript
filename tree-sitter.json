@@ -11,7 +11,8 @@
         "zs"
       ],
       "injection-regex": "^zscript$",
-      "class-name": "TreeSitterZscript"
+      "class-name": "TreeSitterZScript",
+      "highlights": "queries/highlights.scm"
     }
   ],
   "metadata": {

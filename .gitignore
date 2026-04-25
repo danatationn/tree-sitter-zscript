@@ -1,22 +1,4 @@
-# Rust artifacts
-target/
-
-# Node artifacts
-build/
-prebuilds/
-node_modules/
-
-# Swift artifacts
-.build/
-
-# Go artifacts
-_obj/
-
-# Python artifacts
-.venv/
-dist/
-*.egg-info
-*.whl
+src/
 
 # C artifacts
 *.a
@@ -27,22 +9,3 @@ dist/
 *.pc
 *.exp
 *.lib
-
-# Zig artifacts
-.zig-cache/
-zig-cache/
-zig-out/
-
-# Example dirs
-/examples/*/
-
-# Grammar volatiles
-*.wasm
-*.obj
-*.o
-
-# Archives
-*.tar.gz
-*.tgz
-*.zip
-*.jar

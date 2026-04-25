@@ -21,9 +21,6 @@ export default grammar({
     [$.instance_type, $.instance_type],
     [$._expression, $.variable_name, $.fixed_array_type],
     [$.variable_name, $.fixed_array_type],
-    [$.foreach_loop_item, $.instance_type],
-    [$.foreach_loop_item, $.instance_type, $.variable_name],
-    [$.for_loop_statement, $.for_loop_initializer],
     [$.foreach_loop_item, $.constant_expression],
   ],
 
@@ -62,8 +59,9 @@ export default grammar({
     class_definition: $ => seq($.class_header, '{', repeat($._class_content), '}'),
 
     class_header: $ => choice(
-      seq('class', $.identifier, optional(seq(':', $.instance_type)), repeat($.class_definition_flags)),
-      seq('extend', 'class', $.identifier),
+      // i need to alias everything so highlighting can work . the cost of being case-insensitive :unamused:
+      seq($.kw_class, $.identifier, optional(seq(':', $.instance_type)), repeat($.class_definition_flags)),
+      seq(choice($.kw_extend, $.kw_mixin), $.kw_class, $.identifier),
     ),
 
     _class_content: $ => choice(
@@ -79,12 +77,12 @@ export default grammar({
     ),
 
     constant_definition: $ => choice(
-      seq('const', field('name', $.identifier), '=', field('value', $._expression), ';'),
+      seq($.kw_const, field('name', $.identifier), '=', field('value', $._expression), ';'),
       $.static_array_definition,
     ),
 
     default_block: $ => seq(
-      choice('default', 'Default'),
+      $.kw_default,
       '{',
       repeat($.default_definition),
       '}',
@@ -102,17 +100,18 @@ export default grammar({
     default_property: $ => choice(
       seq($.identifier, repeat(seq('.', $.identifier)), repeat1($.constant_expression), ';'),
       seq($.default_special_property, ';'),
-      seq('DamageFunction', $._expression, ';'),
+      seq($.kw_damage_function, $._expression, ';'),
     ),
-    default_special_property: $ => /ClearFlags|Monster|Projectile/,
+    default_special_property: $ => choice($.kw_clear_flags, $.kw_monster, $.kw_projectile),
 
     enumeration_definition: $ => seq(
-      'enum',
+      $.kw_enum,
       $.identifier,
       optional(seq(':', $.integer_type)),
       '{',
       seq($.enumerator, repeat(seq(',', $.enumerator)), optional(',')),
       '}',
+      optional(';'),
     ),
     enumerator: $ => seq(
       $.identifier,
@@ -120,7 +119,7 @@ export default grammar({
     ),
 
     flag_definition: $ => seq(
-      'flagDef',
+      $.kw_flagdef,
       $.identifier,
       ':',
       $.identifier,
@@ -145,7 +144,7 @@ export default grammar({
       '(',
       optional($.method_argument_list_or_void),
       ')',
-      optional('const'),
+      optional($.kw_const),
       choice(seq('{', repeat($._statement), '}'), ';'),
     )),
     method_argument_list: $ => prec.left(choice(
@@ -154,16 +153,16 @@ export default grammar({
     )),
     method_argument_list_or_void: $ => choice(
       $.method_argument_list,
-      'void',
+      $.kw_void,
     ),
 
     property_definition: $ => seq(
-      'property', $.identifier, ':', $.identifier, repeat(seq(',', $.identifier)), ';',
+      $.kw_property, $.identifier, ':', $.identifier, repeat(seq(',', $.identifier)), ';',
     ),
 
     // states block: parens + action scope are optional (bare `States { }` is valid)
     state_block: $ => seq(
-      choice('states', 'States'),
+      $.kw_states,
       optional(seq('(', $.action_scope, repeat(seq(',', $.action_scope)), ')')),
       '{', repeat($._state_item), '}',
     ),
@@ -188,18 +187,18 @@ export default grammar({
       ),
     ),
     state_flow: $ => choice(
-      seq(/[Gg]oto/, $.identifier, optional(seq('+', $.integer_literal)), optional(';')),
-      seq(/[Ss]top|[Ll]oop|[Ww]ait|[Ff]ail/, optional(';')),
+      seq($.kw_goto, $.identifier, optional(seq('+', $.integer_literal)), optional(';')),
+      seq(choice($.kw_stop, $.kw_loop, $.kw_wait, $.kw_fail), optional(';')),
     ),
     state_time: $ => choice(
       seq('-', $.integer_literal),
       $.integer_literal,
-      seq('random', '(', $.integer_literal, ',', $.integer_literal, ')'),
+      seq($.kw_random, '(', $.integer_literal, ',', $.integer_literal, ')'),
     ),
     state_option: $ => choice(
-      /[Bb]right|[Ff]ast|[Ss]low|[Nn]oDelay|[Cc]anRaise/,
-      seq(/[Oo]ffset/, '(', $.integer_literal, ',', $.integer_literal, ')'),
-      seq(/[Ll]ight/, '(', $.string_literal, repeat(seq(',', $.string_literal)), ')'),
+      choice($.kw_bright, $.kw_fast, $.kw_slow, $.kw_no_delay, $.kw_can_raise),
+      seq($.kw_offset, '(', $.integer_literal, ',', $.integer_literal, ')'),
+      seq($.kw_light, '(', $.string_literal, repeat(seq(',', $.string_literal)), ')'),
     ),
     // state function: either nothing (;), a call without trailing ;, or an inline block
     state_function: $ => choice(
@@ -208,7 +207,7 @@ export default grammar({
       seq('{', repeat($._statement), '}'),
     ),
 
-    structure_definition: $ => seq('struct', $.identifier, repeat($.structure_flag), '{', repeat($.structure_content), '}', optional(';')),
+    structure_definition: $ => seq($.kw_struct, $.identifier, repeat($.structure_flag), '{', repeat($.structure_content), '}', optional(';')),
     structure_content: $ => choice(
       $.member_declaration,
       $.method_definition,
@@ -229,7 +228,7 @@ export default grammar({
 
     _expression: $ => choice(
       $.identifier,
-      'super',
+      $.kw_super,
       $.literal,
       $.vector_literal_expression,
       $.color_literal_expression,
@@ -239,7 +238,7 @@ export default grammar({
       // postfix
       prec.left(15, seq($._expression, '(', optional($.argument_list), ')')),
       prec.left(15, seq($.type, '(', $._expression, ')')),
-      prec.left(15, seq('(', 'class', '<', $.type, '>', ')', '(', $._expression, ')')),
+      prec.left(15, seq('(', $.kw_class, '<', $.type, '>', ')', '(', $._expression, ')')),
       prec.left(15, seq($._expression, '[', $._expression, ']')),
       prec.left(15, seq($._expression, '.', $.identifier)),
       prec.left(15, seq($._expression, '++')),
@@ -252,8 +251,8 @@ export default grammar({
       prec.right(14, seq('--', $._expression)),
       prec.right(14, seq('~', $._expression)),
       prec.right(14, seq('+', $._expression)),
-      prec.right(14, seq('alignOf', $._expression)),
-      prec.right(14, seq('sizeOf', $._expression)),
+      prec.right(14, seq($.kw_align_of, $._expression)),
+      prec.right(14, seq($.kw_size_of, $._expression)),
 
       // binary arithmetic
       prec.left(13, seq($._expression, '**', $._expression)),
@@ -266,8 +265,8 @@ export default grammar({
       prec.left(10, seq($._expression, '>>', $._expression)),
       prec.left(10, seq($._expression, '>>>', $._expression)),
       // binary vector
-      prec.left(10, seq($._expression, 'cross', $._expression)),
-      prec.left(10, seq($._expression, 'dot', $._expression)),
+      prec.left(10, seq($._expression, $.kw_cross, $._expression)),
+      prec.left(10, seq($._expression, $.kw_dot, $._expression)),
       // binary concatenation
       prec.left(9, seq($._expression, '..', $._expression)),
       // binary comparison
@@ -281,7 +280,7 @@ export default grammar({
       // binary signed difference
       prec.left(8, seq($._expression, '<>=', $._expression)),
       // binary type
-      prec.left(8, seq($._expression, 'is', $._expression)),
+      prec.left(8, seq($._expression, $.kw_is, $._expression)),
       // binary logical
       prec.left(7, seq($._expression, '&', $._expression)),
       prec.left(6, seq($._expression, '^', $._expression)),
@@ -306,8 +305,6 @@ export default grammar({
       prec.right(1, seq($._expression, '^=', $._expression)),
     ),
 
-    block: $ => seq('{', repeat($._statement), '}'),
-
     _statement: $ => choice(
       $.compound_statement,
       $.expression_statement,
@@ -325,37 +322,37 @@ export default grammar({
 
     compound_statement: $ => seq('{', repeat($._statement), '}'),
     expression_statement: $ => seq($._expression, ';'),
-    conditional_statement: $ => prec.right(seq('if', '(', $._expression, ')', $._statement, optional(seq('else', $._statement)))),
-    switch_statement: $ => seq('switch', '(', $._expression, ')', $._statement),
-    switch_case: $ => seq('case', $._expression, ':'),
-    switch_default: $ => seq('default', ':'),
+    conditional_statement: $ => prec.right(seq($.kw_if, '(', $._expression, ')', $._statement, optional(seq($.kw_else, $._statement)))),
+    switch_statement: $ => seq($.kw_switch, '(', $._expression, ')', $._statement),
+    switch_case: $ => seq($.kw_case, $._expression, ':'),
+    switch_default: $ => seq($.kw_default, ':'),
 
     _loop_statement: $ => choice($.foreach_loop_statement, $.for_loop_statement, $.while_loop_statement, $.do_while_loop_statement),
     for_loop_statement: $ => seq(
-      'for', '(', optional($.for_loop_initializer), ';', optional($._expression), ';', optional($.for_loop_update), ')',
+      $.kw_for, '(', optional($.for_loop_initializer), ';', optional($._expression), ';', optional($.for_loop_update), ')',
       $._statement
     ),
     for_loop_initializer: $ => choice($.for_loop_local_variable_statement, $.for_loop_update),
     for_loop_update: $ => seq($._expression, repeat(seq(',', $._expression))),
     foreach_loop_statement: $ => seq(
-      'foreach', '(', repeat1(seq($.foreach_loop_item, repeat(seq(',', $.foreach_loop_item)))), ':', $._expression, ')',
+      $.kw_foreach, '(', seq($.foreach_loop_item, repeat(seq(',', $.foreach_loop_item))), ':', $._expression, ')',
       $._statement
     ),
     foreach_loop_declaration: $ => seq($.foreach_loop_item, repeat(seq(',', $.foreach_loop_item))),
     foreach_loop_item: $ => seq(optional($.type), $.identifier, optional(seq('[', $._expression, ']'))),
     while_loop_statement: $ => choice(
-      seq('while', '(', $._expression, ')', $._statement),
-      seq('until', '(', $._expression, ')', $._statement),
+      seq($.kw_while, '(', $._expression, ')', $._statement),
+      seq($.kw_until, '(', $._expression, ')', $._statement),
     ),
     do_while_loop_statement: $ => choice(
-      seq('do', $._statement, 'while', '(', $._expression, ')'),
-      seq('do', $._statement, 'until', '(', $._expression, ')'),
+      seq($.kw_do, $._statement, $.kw_while, '(', $._expression, ')'),
+      seq($.kw_do, $._statement, $.kw_until, '(', $._expression, ')'),
     ),
 
     _flow_statement: $ => choice($.continue_flow_statement, $.break_flow_statement, $.return_flow_statement),
-    continue_flow_statement: $ => seq('continue', ';'),
-    break_flow_statement: $ => seq('break', ';'),
-    return_flow_statement: $ => seq('return', optional(seq($._expression, repeat(seq(',', $._expression)))), ';'),
+    continue_flow_statement: $ => seq($.kw_continue, ';'),
+    break_flow_statement: $ => seq($.kw_break, ';'),
+    return_flow_statement: $ => seq($.kw_return, optional(seq($._expression, repeat(seq(',', $._expression)))), ';'),
 
     for_loop_local_variable_statement:  $ => seq($.type, $.local_variable_initializer, repeat(seq(',', $.local_variable_initializer))),
     local_variable_statement:           $ => seq($.type, $.local_variable_initializer, repeat(seq(',', $.local_variable_initializer)), ';'),
@@ -363,7 +360,7 @@ export default grammar({
 
     multi_assignment_statement: $ => seq('[', $._expression, repeat(seq(',', $._expression)), ']', '=', $._expression, ';'),
     null_statement: $ => ';',
-    static_array_definition: $ => seq('static', 'const', $.type, $.variable_name, '=', '{', $.constant_expression, repeat(seq(',', $.constant_expression)), '}', ';'),
+    static_array_definition: $ => seq($.kw_static, $.kw_const, $.type, $.variable_name, '=', '{', $.constant_expression, repeat(seq(',', $.constant_expression)), '}', ';'),
 
     // TYPES //
 
@@ -385,24 +382,24 @@ export default grammar({
       $.read_only_type,
       $.instance_type,
       $.variable_name,
-      'void',
+      $.kw_void,
     ),
 
     numeric_type: $ => choice($.floating_point_type, $.integer_type),
-    floating_point_type: $ => /double|float|float64|float32/,
-    integer_type: $ => /int|uint|int16|uint16|int8|uint8|sbyte|byte|short|ushort/,
-    string_type: $ => 'string',
-    name_type: $ => 'name',
-    boolean_type: $ => 'bool',
-    integer_like_reference_type: $ => /spriteId|textureId/,
-    string_like_reference_type: $ => /sound|stateLabel/,
-    color_type: $ => 'color',
-    let_type: $ => 'let',
-    vector_type: $ => /vector2|vector3/,
-    class_reference_type: $ => seq('class', optional(seq('<', $.type, '>'))),
-    native_pointer_type: $ => choice(seq('@', $.type), 'voidPtr'),
-    dynamic_array_type: $ => seq('array', '<', $.type, '>'),
-    read_only_type: $ => seq('readOnly', '<', $.type, '>'),
+    floating_point_type: $ => choice($.kw_double, $.kw_float, $.kw_float32, $.kw_float64),
+    integer_type: $ => choice($.kw_int, $.kw_uint, $.kw_int16, $.kw_uint16, $.kw_int8, $.kw_uint8, $.kw_sbyte, $.kw_byte, $.kw_short, $.kw_ushort),
+    string_type: $ => token('string'),  // the String class also exists
+    name_type: $ => $.kw_name,
+    boolean_type: $ => $.kw_boolean,
+    integer_like_reference_type: $ => choice($.kw_sprite_id, $.kw_texture_id),
+    string_like_reference_type: $ => choice($.kw_sound, $.kw_state_label),
+    color_type: $ => $.kw_color,
+    let_type: $ => $.kw_let,
+    vector_type: $ => choice($.kw_vector2, $.kw_vector3),
+    class_reference_type: $ => seq($.kw_class, optional(seq('<', $.type, '>'))),
+    native_pointer_type: $ => choice(seq('@', $.type), $.kw_void_ptr),
+    dynamic_array_type: $ => seq($.kw_array, '<', $.type, '>'),
+    read_only_type: $ => seq($.kw_read_only, '<', $.type, '>'),
     instance_type: $ => prec.left(seq(optional('.'), $.identifier, repeat(seq('.', $.identifier)))),
     variable_name: $ => seq($.identifier, repeat(seq('[', optional($.constant_expression), ']'))),
     fixed_array_type: $ => seq($.identifier, repeat1(seq('[', optional($.constant_expression), ']'))),
@@ -410,27 +407,27 @@ export default grammar({
     // FLAGS //
 
     class_definition_flags: $ => choice(
-      'abstract', 'native', 'play', 'ui',
-      seq('replaces', $.identifier),
-      seq('version', $.string_literal),
+      choice($.kw_abstract, $.kw_native, $.kw_play, $.kw_ui),
+      seq($.kw_replaces, $.identifier),
+      seq($.kw_version, $.string_literal),
     ),
     member_declaration_flag: $ => choice(
-      'internal', 'latent', 'meta', 'native', 'play', 'private', 'protected', 'readOnly', 'transient', 'ui',
+      choice($.kw_internal, $.kw_latent, $.kw_meta, $.kw_native, $.kw_play, $.kw_private, $.kw_protected, $.kw_read_only, $.kw_transient, $.kw_ui),
       $.deprecated_flag, $.version_flag,
     ),
     method_definition_flag: $ => choice(
-      'action', 'clearScope', 'final', 'native', 'override', 'play', 'private', 'protected', 'static', 'ui', 'varArg', 'virtual', 'virtualScope',
+      choice($.kw_action, $.kw_clear_scope, $.kw_final, $.kw_native, $.kw_override, $.kw_play, $.kw_private, $.kw_protected, $.kw_static, $.kw_ui, $.kw_var_arg, $.kw_virtual, $.kw_virtual_scope),
       $.deprecated_flag, $.version_flag, $.action_flag,
     ),
     structure_flag: $ => choice(
-      'clearScope', 'native', 'play', 'ui',
+      choice($.kw_clear_scope, $.kw_native, $.kw_play, $.kw_ui),
       $.version_flag,
     ),
 
-    deprecated_flag: $ => seq('deprecated', '(', $.string_literal, optional(seq(',', $.string_literal)), ')'),
-    version_flag: $ => seq('version', '(', $.string_literal, ')'),
-    action_flag: $ => seq('action', '(', $.action_scope, repeat(seq(',', $.action_scope)), ')'),
-    action_scope: $ => /actor|item|overlay|weapon/,
+    deprecated_flag: $ => seq($.kw_deprecated, '(', $.string_literal, optional(seq(',', $.string_literal)), ')'),
+    version_flag: $ => seq($.kw_version, '(', $.string_literal, ')'),
+    action_flag: $ => seq($.kw_action, '(', $.action_scope, repeat(seq(',', $.action_scope)), ')'),
+    action_scope: $ => choice($.kw_actor, $.kw_item, $.kw_overlay, $.kw_weapon),
 
     // LITERALS //
 
@@ -442,10 +439,10 @@ export default grammar({
       seq('(', $._expression, ',', $._expression, optional(seq(',', $._expression)), ')'),
     ),
     color_literal_expression: $ => seq(
-      'color', '(', $._expression, ',', $._expression, ',', $._expression, optional(seq(',', $._expression)), ')',
+      $.kw_color, '(', $._expression, ',', $._expression, ',', $._expression, optional(seq(',', $._expression)), ')',
     ),
     constant_expression: $ => $._expression,
-    string_literal: $ => /"[^"]*"/,
+    string_literal: $ => token(seq('"', repeat(choice(/[^"\\]/, /\\./)), '"')),  // so it doesn't break on escape characters
 
     identifier: $ => /[a-zA-Z_][a-zA-Z0-9_]*/,
 
@@ -467,19 +464,146 @@ export default grammar({
       seq(/[0-9]+/, '.', /[0-9]*/, optional(seq(/[eE]/, optional(/[+\-]/), /[0-9]+/)), optional(/[fF]/)),
     )),
 
-    boolean_literal: $ => /false|true/,
+    boolean_literal: $ => choice($.kw_false, $.kw_true),
 
-    name_literal: $ => seq('\'', $.name_character, '\''),
+    name_literal: $ => seq('\'', repeat1($.name_character), '\''),
     name_character: $ => choice(
       '\\\'',
       /[\s\S]/,
     ),
 
-    null_literal: $ => 'null',
+    null_literal: $ => /null/i,
 
     // TOKENS //
 
     line_comment:  $ => token(seq('//', /.*/)),
     block_comment: $ => token(seq('/*', /[^*]*\*+([^/*][^*]*\*+)*/, '/')),
+
+    // KEYWORDS //
+
+    kw_const:  $ => /const/i,
+    kw_void:   $ => /void/i,
+    kw_void_ptr:   $ => /voidPtr/i,
+    kw_false:  $ => /false/i,
+    kw_true:   $ => /true/i,
+    kw_null:   $ => /null/i,
+
+    kw_struct: $ => /struct/i,
+
+    kw_double:       $ => /double/i,
+    kw_float:        $ => /float/i,
+    kw_float64:      $ => /float64/i,
+    kw_float32:      $ => /float32/i,
+    kw_int:          $ => /int/i,
+    kw_uint:         $ => /uint/i,
+    kw_int16:        $ => /int16/i,
+    kw_uint16:       $ => /uint16/i,
+    kw_int8:         $ => /int8/i,
+    kw_uint8:        $ => /uint8/i,
+    kw_sbyte:        $ => /sbyte/i,
+    kw_byte:         $ => /byte/i,
+    kw_short:        $ => /short/i,
+    kw_ushort:       $ => /ushort/i,
+    kw_name:         $ => /name/i,
+    kw_boolean:      $ => /bool/i,
+    kw_sprite_id:    $ => /spriteId/i,
+    kw_texture_id:   $ => /textureId/i,
+    kw_sound:        $ => /sound/i,
+    kw_state_label:  $ => /stateLabel/i,
+    kw_color:        $ => /color/i,
+    kw_let:          $ => /let/i,
+    kw_vector2:      $ => /vector2/i,
+    kw_vector3:      $ => /vector3/i,
+    kw_array:        $ => /array/i,
+    kw_read_only:    $ => /readOnly/i,
+
+    kw_super:  $ => /super/i,
+
+    kw_align_of:  $ => /alignOf/i,
+    kw_size_of:   $ => /sizeOf/i,
+    kw_cross:     $ => /cross/i,
+    kw_dot:       $ => /dot/i,
+    kw_is:        $ => /is/i,
+
+    kw_enum:     $ => /enum/i,
+    kw_flagdef:  $ => /flagDef/i,
+    kw_property: $ => /property/i,
+
+    kw_if:        $ => /if/i,
+    kw_else:      $ => /else/i,
+    kw_switch:    $ => /switch/i,
+    kw_case:      $ => /case/i,
+    kw_default:   $ => /default/i,
+
+    // common flags
+    kw_native:       $ => /native/i,
+    kw_clear_scope:  $ => /clearScope/i,
+    kw_play:         $ => /play/i,
+    kw_private:      $ => /private/i,
+    kw_protected:    $ => /protected/i,
+    kw_static:       $ => /static/i,
+    kw_ui:           $ => /ui/i,
+
+    // member dec flags
+    kw_internal:   $ => /internal/i,
+    kw_latent:     $ => /latent/i,
+    kw_transient:  $ => /transient/i,
+    kw_meta:       $ => /meta/i,
+
+    // method def flags
+    kw_action:         $ => /action/i,
+    kw_final:          $ => /final/i,
+    kw_override:       $ => /override/i,
+    kw_var_arg:        $ => /varArg/i,
+    kw_virtual:        $ => /virtual/i,
+    kw_virtual_scope:  $ => /virtualScope/i,
+
+    // flow
+    kw_for:      $ => /for/i,
+    kw_foreach:  $ => /foreach/i,
+    kw_while:    $ => /while/i,
+    kw_until:    $ => /until/i,
+    kw_do:       $ => /do/i,
+
+    kw_continue: $ => /continue/i,
+    kw_break:    $ => /break/i,
+    kw_return:   $ => /return/i,
+
+    kw_deprecated: $ => /deprecated/i,
+    kw_actor:    $ => /actor/i,
+    kw_item:     $ => /item/i,
+    kw_overlay:  $ => /overlay/i,
+    kw_weapon:   $ => /weapon/i,
+
+    // class flags
+    kw_class:    $ => /class/i,
+    kw_extend:   $ => /extend/i,
+    kw_mixin:    $ => /mixin/i,
+    kw_abstract: $ => /abstract/i,
+    kw_native:   $ => /native/i,
+    kw_play:     $ => /play/i,
+    kw_replaces: $ => /replaces/i,
+    kw_version:  $ => /version/i,
+
+    kw_default:          $ => /default/i,
+    kw_damage_function:  $ => /DamageFunction/i,
+    kw_clear_flags:      $ => /ClearFlags/i,
+    kw_monster:          $ => /Monster/i,
+    kw_projectile:       $ => /Projectile/i,
+
+    kw_states:     $ => /states/i,
+    kw_goto:       $ => /goto/i,
+    kw_stop:       $ => /stop/i,
+    kw_loop:       $ => /loop/i,
+    kw_wait:       $ => /wait/i,
+    kw_fail:       $ => /fail/i,
+    kw_random:     $ => /random/i,
+    kw_bright:     $ => /bright/i,
+    kw_fast:       $ => /fast/i,
+    kw_slow:       $ => /slow/i,
+    kw_no_delay:   $ => /noDelay/i,
+    kw_can_raise:  $ => /canRaise/i,
+    kw_offset:     $ => /offset/i,
+    kw_light:      $ => /light/i,
   }
 });
