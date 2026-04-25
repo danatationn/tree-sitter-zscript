@@ -1,0 +1,3216 @@
+[
+  {
+    "type": "action_flag",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "action_scope",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "argument_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "argument_list",
+          "named": true
+        },
+        {
+          "type": "color_literal_expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        },
+        {
+          "type": "vector_literal_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "break_flow_statement",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "class_definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "class_header",
+          "named": true
+        },
+        {
+          "type": "constant_definition",
+          "named": true
+        },
+        {
+          "type": "default_block",
+          "named": true
+        },
+        {
+          "type": "enumeration_definition",
+          "named": true
+        },
+        {
+          "type": "flag_definition",
+          "named": true
+        },
+        {
+          "type": "member_declaration",
+          "named": true
+        },
+        {
+          "type": "method_definition",
+          "named": true
+        },
+        {
+          "type": "property_definition",
+          "named": true
+        },
+        {
+          "type": "state_block",
+          "named": true
+        },
+        {
+          "type": "structure_definition",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "class_definition_flags",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "class_header",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "class_definition_flags",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "instance_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "class_reference_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "color_literal_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "argument_list",
+          "named": true
+        },
+        {
+          "type": "color_literal_expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        },
+        {
+          "type": "vector_literal_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "color_type",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "compound_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "break_flow_statement",
+          "named": true
+        },
+        {
+          "type": "compound_statement",
+          "named": true
+        },
+        {
+          "type": "conditional_statement",
+          "named": true
+        },
+        {
+          "type": "continue_flow_statement",
+          "named": true
+        },
+        {
+          "type": "do_while_loop_statement",
+          "named": true
+        },
+        {
+          "type": "expression_statement",
+          "named": true
+        },
+        {
+          "type": "for_loop_statement",
+          "named": true
+        },
+        {
+          "type": "foreach_loop_statement",
+          "named": true
+        },
+        {
+          "type": "local_variable_statement",
+          "named": true
+        },
+        {
+          "type": "multi_assignment_statement",
+          "named": true
+        },
+        {
+          "type": "null_statement",
+          "named": true
+        },
+        {
+          "type": "return_flow_statement",
+          "named": true
+        },
+        {
+          "type": "static_array_definition",
+          "named": true
+        },
+        {
+          "type": "switch_case",
+          "named": true
+        },
+        {
+          "type": "switch_default",
+          "named": true
+        },
+        {
+          "type": "switch_statement",
+          "named": true
+        },
+        {
+          "type": "while_loop_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "conditional_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "argument_list",
+          "named": true
+        },
+        {
+          "type": "break_flow_statement",
+          "named": true
+        },
+        {
+          "type": "color_literal_expression",
+          "named": true
+        },
+        {
+          "type": "compound_statement",
+          "named": true
+        },
+        {
+          "type": "conditional_statement",
+          "named": true
+        },
+        {
+          "type": "continue_flow_statement",
+          "named": true
+        },
+        {
+          "type": "do_while_loop_statement",
+          "named": true
+        },
+        {
+          "type": "expression_statement",
+          "named": true
+        },
+        {
+          "type": "for_loop_statement",
+          "named": true
+        },
+        {
+          "type": "foreach_loop_statement",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "local_variable_statement",
+          "named": true
+        },
+        {
+          "type": "multi_assignment_statement",
+          "named": true
+        },
+        {
+          "type": "null_statement",
+          "named": true
+        },
+        {
+          "type": "return_flow_statement",
+          "named": true
+        },
+        {
+          "type": "static_array_definition",
+          "named": true
+        },
+        {
+          "type": "switch_case",
+          "named": true
+        },
+        {
+          "type": "switch_default",
+          "named": true
+        },
+        {
+          "type": "switch_statement",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        },
+        {
+          "type": "vector_literal_expression",
+          "named": true
+        },
+        {
+          "type": "while_loop_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "constant_definition",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "!",
+            "named": false
+          },
+          {
+            "type": "!=",
+            "named": false
+          },
+          {
+            "type": "%",
+            "named": false
+          },
+          {
+            "type": "%=",
+            "named": false
+          },
+          {
+            "type": "&",
+            "named": false
+          },
+          {
+            "type": "&&",
+            "named": false
+          },
+          {
+            "type": "&=",
+            "named": false
+          },
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": "*",
+            "named": false
+          },
+          {
+            "type": "**",
+            "named": false
+          },
+          {
+            "type": "*=",
+            "named": false
+          },
+          {
+            "type": "+",
+            "named": false
+          },
+          {
+            "type": "++",
+            "named": false
+          },
+          {
+            "type": "+=",
+            "named": false
+          },
+          {
+            "type": "-",
+            "named": false
+          },
+          {
+            "type": "--",
+            "named": false
+          },
+          {
+            "type": "-=",
+            "named": false
+          },
+          {
+            "type": ".",
+            "named": false
+          },
+          {
+            "type": "..",
+            "named": false
+          },
+          {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "/=",
+            "named": false
+          },
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "<",
+            "named": false
+          },
+          {
+            "type": "<<",
+            "named": false
+          },
+          {
+            "type": "<<=",
+            "named": false
+          },
+          {
+            "type": "<=",
+            "named": false
+          },
+          {
+            "type": "<>=",
+            "named": false
+          },
+          {
+            "type": "=",
+            "named": false
+          },
+          {
+            "type": "==",
+            "named": false
+          },
+          {
+            "type": ">",
+            "named": false
+          },
+          {
+            "type": ">=",
+            "named": false
+          },
+          {
+            "type": ">>",
+            "named": false
+          },
+          {
+            "type": ">>=",
+            "named": false
+          },
+          {
+            "type": ">>>",
+            "named": false
+          },
+          {
+            "type": ">>>=",
+            "named": false
+          },
+          {
+            "type": "?",
+            "named": false
+          },
+          {
+            "type": "[",
+            "named": false
+          },
+          {
+            "type": "]",
+            "named": false
+          },
+          {
+            "type": "^",
+            "named": false
+          },
+          {
+            "type": "^=",
+            "named": false
+          },
+          {
+            "type": "alignOf",
+            "named": false
+          },
+          {
+            "type": "argument_list",
+            "named": true
+          },
+          {
+            "type": "class",
+            "named": false
+          },
+          {
+            "type": "color_literal_expression",
+            "named": true
+          },
+          {
+            "type": "cross",
+            "named": false
+          },
+          {
+            "type": "dot",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "is",
+            "named": false
+          },
+          {
+            "type": "literal",
+            "named": true
+          },
+          {
+            "type": "sizeOf",
+            "named": false
+          },
+          {
+            "type": "super",
+            "named": false
+          },
+          {
+            "type": "type",
+            "named": true
+          },
+          {
+            "type": "vector_literal_expression",
+            "named": true
+          },
+          {
+            "type": "|",
+            "named": false
+          },
+          {
+            "type": "|=",
+            "named": false
+          },
+          {
+            "type": "||",
+            "named": false
+          },
+          {
+            "type": "~",
+            "named": false
+          },
+          {
+            "type": "~==",
+            "named": false
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "static_array_definition",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "constant_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "argument_list",
+          "named": true
+        },
+        {
+          "type": "color_literal_expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        },
+        {
+          "type": "vector_literal_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "continue_flow_statement",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "default_block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "default_definition",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "default_definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "default_flag",
+          "named": true
+        },
+        {
+          "type": "default_property",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "default_flag",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "default_property",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "argument_list",
+          "named": true
+        },
+        {
+          "type": "color_literal_expression",
+          "named": true
+        },
+        {
+          "type": "constant_expression",
+          "named": true
+        },
+        {
+          "type": "default_special_property",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        },
+        {
+          "type": "vector_literal_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "deprecated_flag",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "string_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "do_while_loop_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "argument_list",
+          "named": true
+        },
+        {
+          "type": "break_flow_statement",
+          "named": true
+        },
+        {
+          "type": "color_literal_expression",
+          "named": true
+        },
+        {
+          "type": "compound_statement",
+          "named": true
+        },
+        {
+          "type": "conditional_statement",
+          "named": true
+        },
+        {
+          "type": "continue_flow_statement",
+          "named": true
+        },
+        {
+          "type": "do_while_loop_statement",
+          "named": true
+        },
+        {
+          "type": "expression_statement",
+          "named": true
+        },
+        {
+          "type": "for_loop_statement",
+          "named": true
+        },
+        {
+          "type": "foreach_loop_statement",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "local_variable_statement",
+          "named": true
+        },
+        {
+          "type": "multi_assignment_statement",
+          "named": true
+        },
+        {
+          "type": "null_statement",
+          "named": true
+        },
+        {
+          "type": "return_flow_statement",
+          "named": true
+        },
+        {
+          "type": "static_array_definition",
+          "named": true
+        },
+        {
+          "type": "switch_case",
+          "named": true
+        },
+        {
+          "type": "switch_default",
+          "named": true
+        },
+        {
+          "type": "switch_statement",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        },
+        {
+          "type": "vector_literal_expression",
+          "named": true
+        },
+        {
+          "type": "while_loop_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "dynamic_array_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "enumeration_definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "enumerator",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "integer_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "enumerator",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "constant_expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "expression_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "argument_list",
+          "named": true
+        },
+        {
+          "type": "color_literal_expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        },
+        {
+          "type": "vector_literal_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "fixed_array_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "constant_expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "flag_definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "integer_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "for_loop_initializer",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "for_loop_local_variable_statement",
+          "named": true
+        },
+        {
+          "type": "for_loop_update",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "for_loop_local_variable_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "local_variable_initializer",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "for_loop_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "argument_list",
+          "named": true
+        },
+        {
+          "type": "break_flow_statement",
+          "named": true
+        },
+        {
+          "type": "color_literal_expression",
+          "named": true
+        },
+        {
+          "type": "compound_statement",
+          "named": true
+        },
+        {
+          "type": "conditional_statement",
+          "named": true
+        },
+        {
+          "type": "continue_flow_statement",
+          "named": true
+        },
+        {
+          "type": "do_while_loop_statement",
+          "named": true
+        },
+        {
+          "type": "expression_statement",
+          "named": true
+        },
+        {
+          "type": "for_loop_initializer",
+          "named": true
+        },
+        {
+          "type": "for_loop_statement",
+          "named": true
+        },
+        {
+          "type": "for_loop_update",
+          "named": true
+        },
+        {
+          "type": "foreach_loop_statement",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "local_variable_statement",
+          "named": true
+        },
+        {
+          "type": "multi_assignment_statement",
+          "named": true
+        },
+        {
+          "type": "null_statement",
+          "named": true
+        },
+        {
+          "type": "return_flow_statement",
+          "named": true
+        },
+        {
+          "type": "static_array_definition",
+          "named": true
+        },
+        {
+          "type": "switch_case",
+          "named": true
+        },
+        {
+          "type": "switch_default",
+          "named": true
+        },
+        {
+          "type": "switch_statement",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        },
+        {
+          "type": "vector_literal_expression",
+          "named": true
+        },
+        {
+          "type": "while_loop_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "for_loop_update",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "argument_list",
+          "named": true
+        },
+        {
+          "type": "color_literal_expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        },
+        {
+          "type": "vector_literal_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "foreach_loop_item",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "argument_list",
+          "named": true
+        },
+        {
+          "type": "color_literal_expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        },
+        {
+          "type": "vector_literal_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "foreach_loop_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "argument_list",
+          "named": true
+        },
+        {
+          "type": "break_flow_statement",
+          "named": true
+        },
+        {
+          "type": "color_literal_expression",
+          "named": true
+        },
+        {
+          "type": "compound_statement",
+          "named": true
+        },
+        {
+          "type": "conditional_statement",
+          "named": true
+        },
+        {
+          "type": "continue_flow_statement",
+          "named": true
+        },
+        {
+          "type": "do_while_loop_statement",
+          "named": true
+        },
+        {
+          "type": "expression_statement",
+          "named": true
+        },
+        {
+          "type": "for_loop_statement",
+          "named": true
+        },
+        {
+          "type": "foreach_loop_item",
+          "named": true
+        },
+        {
+          "type": "foreach_loop_statement",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "local_variable_statement",
+          "named": true
+        },
+        {
+          "type": "multi_assignment_statement",
+          "named": true
+        },
+        {
+          "type": "null_statement",
+          "named": true
+        },
+        {
+          "type": "return_flow_statement",
+          "named": true
+        },
+        {
+          "type": "static_array_definition",
+          "named": true
+        },
+        {
+          "type": "switch_case",
+          "named": true
+        },
+        {
+          "type": "switch_default",
+          "named": true
+        },
+        {
+          "type": "switch_statement",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        },
+        {
+          "type": "vector_literal_expression",
+          "named": true
+        },
+        {
+          "type": "while_loop_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "include_directive",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "string_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "instance_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "integer_literal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "decimal_literal",
+          "named": true
+        },
+        {
+          "type": "hexadecimal_literal",
+          "named": true
+        },
+        {
+          "type": "octal_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "literal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "floating_point_literal",
+          "named": true
+        },
+        {
+          "type": "integer_literal",
+          "named": true
+        },
+        {
+          "type": "name_literal",
+          "named": true
+        },
+        {
+          "type": "null_literal",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "local_variable_initializer",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "argument_list",
+          "named": true
+        },
+        {
+          "type": "color_literal_expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        },
+        {
+          "type": "variable_name",
+          "named": true
+        },
+        {
+          "type": "vector_literal_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "local_variable_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "local_variable_initializer",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "member_declaration",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "member_declaration_flag",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        },
+        {
+          "type": "variable_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "member_declaration_flag",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "deprecated_flag",
+          "named": true
+        },
+        {
+          "type": "version_flag",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "method_argument_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "constant_expression",
+          "named": true
+        },
+        {
+          "type": "method_argument_list",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        },
+        {
+          "type": "variable_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "method_argument_list_or_void",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "method_argument_list",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "method_definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "break_flow_statement",
+          "named": true
+        },
+        {
+          "type": "compound_statement",
+          "named": true
+        },
+        {
+          "type": "conditional_statement",
+          "named": true
+        },
+        {
+          "type": "continue_flow_statement",
+          "named": true
+        },
+        {
+          "type": "do_while_loop_statement",
+          "named": true
+        },
+        {
+          "type": "expression_statement",
+          "named": true
+        },
+        {
+          "type": "for_loop_statement",
+          "named": true
+        },
+        {
+          "type": "foreach_loop_statement",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "local_variable_statement",
+          "named": true
+        },
+        {
+          "type": "method_argument_list_or_void",
+          "named": true
+        },
+        {
+          "type": "method_definition_flag",
+          "named": true
+        },
+        {
+          "type": "multi_assignment_statement",
+          "named": true
+        },
+        {
+          "type": "null_statement",
+          "named": true
+        },
+        {
+          "type": "return_flow_statement",
+          "named": true
+        },
+        {
+          "type": "static_array_definition",
+          "named": true
+        },
+        {
+          "type": "switch_case",
+          "named": true
+        },
+        {
+          "type": "switch_default",
+          "named": true
+        },
+        {
+          "type": "switch_statement",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        },
+        {
+          "type": "while_loop_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "method_definition_flag",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "action_flag",
+          "named": true
+        },
+        {
+          "type": "deprecated_flag",
+          "named": true
+        },
+        {
+          "type": "version_flag",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "multi_assignment_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "argument_list",
+          "named": true
+        },
+        {
+          "type": "color_literal_expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        },
+        {
+          "type": "vector_literal_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "name_character",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "name_literal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "name_character",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "native_pointer_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "null_statement",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "numeric_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "floating_point_type",
+          "named": true
+        },
+        {
+          "type": "integer_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "property_definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "read_only_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "return_flow_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "argument_list",
+          "named": true
+        },
+        {
+          "type": "color_literal_expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        },
+        {
+          "type": "vector_literal_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "source_file",
+    "named": true,
+    "root": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "class_definition",
+          "named": true
+        },
+        {
+          "type": "constant_definition",
+          "named": true
+        },
+        {
+          "type": "enumeration_definition",
+          "named": true
+        },
+        {
+          "type": "include_directive",
+          "named": true
+        },
+        {
+          "type": "structure_definition",
+          "named": true
+        },
+        {
+          "type": "version_directive",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "state_block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "action_scope",
+          "named": true
+        },
+        {
+          "type": "state_flow",
+          "named": true
+        },
+        {
+          "type": "state_label",
+          "named": true
+        },
+        {
+          "type": "state_line",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "state_flow",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "integer_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "state_function",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "argument_list",
+          "named": true
+        },
+        {
+          "type": "break_flow_statement",
+          "named": true
+        },
+        {
+          "type": "compound_statement",
+          "named": true
+        },
+        {
+          "type": "conditional_statement",
+          "named": true
+        },
+        {
+          "type": "continue_flow_statement",
+          "named": true
+        },
+        {
+          "type": "do_while_loop_statement",
+          "named": true
+        },
+        {
+          "type": "expression_statement",
+          "named": true
+        },
+        {
+          "type": "for_loop_statement",
+          "named": true
+        },
+        {
+          "type": "foreach_loop_statement",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "local_variable_statement",
+          "named": true
+        },
+        {
+          "type": "multi_assignment_statement",
+          "named": true
+        },
+        {
+          "type": "null_statement",
+          "named": true
+        },
+        {
+          "type": "return_flow_statement",
+          "named": true
+        },
+        {
+          "type": "static_array_definition",
+          "named": true
+        },
+        {
+          "type": "switch_case",
+          "named": true
+        },
+        {
+          "type": "switch_default",
+          "named": true
+        },
+        {
+          "type": "switch_statement",
+          "named": true
+        },
+        {
+          "type": "while_loop_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "state_label",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "state_line",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "break_flow_statement",
+          "named": true
+        },
+        {
+          "type": "compound_statement",
+          "named": true
+        },
+        {
+          "type": "conditional_statement",
+          "named": true
+        },
+        {
+          "type": "continue_flow_statement",
+          "named": true
+        },
+        {
+          "type": "do_while_loop_statement",
+          "named": true
+        },
+        {
+          "type": "expression_statement",
+          "named": true
+        },
+        {
+          "type": "for_loop_statement",
+          "named": true
+        },
+        {
+          "type": "foreach_loop_statement",
+          "named": true
+        },
+        {
+          "type": "local_variable_statement",
+          "named": true
+        },
+        {
+          "type": "multi_assignment_statement",
+          "named": true
+        },
+        {
+          "type": "null_statement",
+          "named": true
+        },
+        {
+          "type": "return_flow_statement",
+          "named": true
+        },
+        {
+          "type": "state_frames",
+          "named": true
+        },
+        {
+          "type": "state_function",
+          "named": true
+        },
+        {
+          "type": "state_option",
+          "named": true
+        },
+        {
+          "type": "state_sprite",
+          "named": true
+        },
+        {
+          "type": "state_time",
+          "named": true
+        },
+        {
+          "type": "static_array_definition",
+          "named": true
+        },
+        {
+          "type": "switch_case",
+          "named": true
+        },
+        {
+          "type": "switch_default",
+          "named": true
+        },
+        {
+          "type": "switch_statement",
+          "named": true
+        },
+        {
+          "type": "while_loop_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "state_option",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "integer_literal",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "state_time",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "integer_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "static_array_definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "constant_expression",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        },
+        {
+          "type": "variable_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "structure_content",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "constant_definition",
+          "named": true
+        },
+        {
+          "type": "enumeration_definition",
+          "named": true
+        },
+        {
+          "type": "member_declaration",
+          "named": true
+        },
+        {
+          "type": "method_definition",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "structure_definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "structure_content",
+          "named": true
+        },
+        {
+          "type": "structure_flag",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "structure_flag",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "version_flag",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "switch_case",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "argument_list",
+          "named": true
+        },
+        {
+          "type": "color_literal_expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        },
+        {
+          "type": "vector_literal_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "switch_default",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "switch_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "argument_list",
+          "named": true
+        },
+        {
+          "type": "break_flow_statement",
+          "named": true
+        },
+        {
+          "type": "color_literal_expression",
+          "named": true
+        },
+        {
+          "type": "compound_statement",
+          "named": true
+        },
+        {
+          "type": "conditional_statement",
+          "named": true
+        },
+        {
+          "type": "continue_flow_statement",
+          "named": true
+        },
+        {
+          "type": "do_while_loop_statement",
+          "named": true
+        },
+        {
+          "type": "expression_statement",
+          "named": true
+        },
+        {
+          "type": "for_loop_statement",
+          "named": true
+        },
+        {
+          "type": "foreach_loop_statement",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "local_variable_statement",
+          "named": true
+        },
+        {
+          "type": "multi_assignment_statement",
+          "named": true
+        },
+        {
+          "type": "null_statement",
+          "named": true
+        },
+        {
+          "type": "return_flow_statement",
+          "named": true
+        },
+        {
+          "type": "static_array_definition",
+          "named": true
+        },
+        {
+          "type": "switch_case",
+          "named": true
+        },
+        {
+          "type": "switch_default",
+          "named": true
+        },
+        {
+          "type": "switch_statement",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        },
+        {
+          "type": "vector_literal_expression",
+          "named": true
+        },
+        {
+          "type": "while_loop_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "boolean_type",
+          "named": true
+        },
+        {
+          "type": "class_reference_type",
+          "named": true
+        },
+        {
+          "type": "color_type",
+          "named": true
+        },
+        {
+          "type": "dynamic_array_type",
+          "named": true
+        },
+        {
+          "type": "fixed_array_type",
+          "named": true
+        },
+        {
+          "type": "instance_type",
+          "named": true
+        },
+        {
+          "type": "integer_like_reference_type",
+          "named": true
+        },
+        {
+          "type": "let_type",
+          "named": true
+        },
+        {
+          "type": "name_type",
+          "named": true
+        },
+        {
+          "type": "native_pointer_type",
+          "named": true
+        },
+        {
+          "type": "numeric_type",
+          "named": true
+        },
+        {
+          "type": "read_only_type",
+          "named": true
+        },
+        {
+          "type": "string_like_reference_type",
+          "named": true
+        },
+        {
+          "type": "string_type",
+          "named": true
+        },
+        {
+          "type": "variable_name",
+          "named": true
+        },
+        {
+          "type": "vector_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "variable_name",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "constant_expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "vector_literal_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "argument_list",
+          "named": true
+        },
+        {
+          "type": "color_literal_expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        },
+        {
+          "type": "vector_literal_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "version_directive",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "string_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "version_flag",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "string_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "while_loop_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "argument_list",
+          "named": true
+        },
+        {
+          "type": "break_flow_statement",
+          "named": true
+        },
+        {
+          "type": "color_literal_expression",
+          "named": true
+        },
+        {
+          "type": "compound_statement",
+          "named": true
+        },
+        {
+          "type": "conditional_statement",
+          "named": true
+        },
+        {
+          "type": "continue_flow_statement",
+          "named": true
+        },
+        {
+          "type": "do_while_loop_statement",
+          "named": true
+        },
+        {
+          "type": "expression_statement",
+          "named": true
+        },
+        {
+          "type": "for_loop_statement",
+          "named": true
+        },
+        {
+          "type": "foreach_loop_statement",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        },
+        {
+          "type": "local_variable_statement",
+          "named": true
+        },
+        {
+          "type": "multi_assignment_statement",
+          "named": true
+        },
+        {
+          "type": "null_statement",
+          "named": true
+        },
+        {
+          "type": "return_flow_statement",
+          "named": true
+        },
+        {
+          "type": "static_array_definition",
+          "named": true
+        },
+        {
+          "type": "switch_case",
+          "named": true
+        },
+        {
+          "type": "switch_default",
+          "named": true
+        },
+        {
+          "type": "switch_statement",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        },
+        {
+          "type": "vector_literal_expression",
+          "named": true
+        },
+        {
+          "type": "while_loop_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "!",
+    "named": false
+  },
+  {
+    "type": "!=",
+    "named": false
+  },
+  {
+    "type": "#include",
+    "named": false
+  },
+  {
+    "type": "%",
+    "named": false
+  },
+  {
+    "type": "%=",
+    "named": false
+  },
+  {
+    "type": "&",
+    "named": false
+  },
+  {
+    "type": "&&",
+    "named": false
+  },
+  {
+    "type": "&=",
+    "named": false
+  },
+  {
+    "type": "'",
+    "named": false
+  },
+  {
+    "type": "(",
+    "named": false
+  },
+  {
+    "type": ")",
+    "named": false
+  },
+  {
+    "type": "*",
+    "named": false
+  },
+  {
+    "type": "**",
+    "named": false
+  },
+  {
+    "type": "*=",
+    "named": false
+  },
+  {
+    "type": "+",
+    "named": false
+  },
+  {
+    "type": "++",
+    "named": false
+  },
+  {
+    "type": "+=",
+    "named": false
+  },
+  {
+    "type": ",",
+    "named": false
+  },
+  {
+    "type": "-",
+    "named": false
+  },
+  {
+    "type": "--",
+    "named": false
+  },
+  {
+    "type": "-=",
+    "named": false
+  },
+  {
+    "type": ".",
+    "named": false
+  },
+  {
+    "type": "..",
+    "named": false
+  },
+  {
+    "type": "/",
+    "named": false
+  },
+  {
+    "type": "/=",
+    "named": false
+  },
+  {
+    "type": ":",
+    "named": false
+  },
+  {
+    "type": ";",
+    "named": false
+  },
+  {
+    "type": "<",
+    "named": false
+  },
+  {
+    "type": "<<",
+    "named": false
+  },
+  {
+    "type": "<<=",
+    "named": false
+  },
+  {
+    "type": "<=",
+    "named": false
+  },
+  {
+    "type": "<>=",
+    "named": false
+  },
+  {
+    "type": "=",
+    "named": false
+  },
+  {
+    "type": "==",
+    "named": false
+  },
+  {
+    "type": ">",
+    "named": false
+  },
+  {
+    "type": ">=",
+    "named": false
+  },
+  {
+    "type": ">>",
+    "named": false
+  },
+  {
+    "type": ">>=",
+    "named": false
+  },
+  {
+    "type": ">>>",
+    "named": false
+  },
+  {
+    "type": ">>>=",
+    "named": false
+  },
+  {
+    "type": "?",
+    "named": false
+  },
+  {
+    "type": "@",
+    "named": false
+  },
+  {
+    "type": "DamageFunction",
+    "named": false
+  },
+  {
+    "type": "Default",
+    "named": false
+  },
+  {
+    "type": "States",
+    "named": false
+  },
+  {
+    "type": "[",
+    "named": false
+  },
+  {
+    "type": "\\'",
+    "named": false
+  },
+  {
+    "type": "]",
+    "named": false
+  },
+  {
+    "type": "^",
+    "named": false
+  },
+  {
+    "type": "^=",
+    "named": false
+  },
+  {
+    "type": "abstract",
+    "named": false
+  },
+  {
+    "type": "action",
+    "named": false
+  },
+  {
+    "type": "action_scope",
+    "named": true
+  },
+  {
+    "type": "alignOf",
+    "named": false
+  },
+  {
+    "type": "array",
+    "named": false
+  },
+  {
+    "type": "block_comment",
+    "named": true,
+    "extra": true
+  },
+  {
+    "type": "boolean_literal",
+    "named": true
+  },
+  {
+    "type": "boolean_type",
+    "named": true
+  },
+  {
+    "type": "break",
+    "named": false
+  },
+  {
+    "type": "case",
+    "named": false
+  },
+  {
+    "type": "class",
+    "named": false
+  },
+  {
+    "type": "clearScope",
+    "named": false
+  },
+  {
+    "type": "color",
+    "named": false
+  },
+  {
+    "type": "const",
+    "named": false
+  },
+  {
+    "type": "continue",
+    "named": false
+  },
+  {
+    "type": "cross",
+    "named": false
+  },
+  {
+    "type": "decimal_literal",
+    "named": true
+  },
+  {
+    "type": "default",
+    "named": false
+  },
+  {
+    "type": "default_special_property",
+    "named": true
+  },
+  {
+    "type": "deprecated",
+    "named": false
+  },
+  {
+    "type": "do",
+    "named": false
+  },
+  {
+    "type": "dot",
+    "named": false
+  },
+  {
+    "type": "else",
+    "named": false
+  },
+  {
+    "type": "enum",
+    "named": false
+  },
+  {
+    "type": "extend",
+    "named": false
+  },
+  {
+    "type": "final",
+    "named": false
+  },
+  {
+    "type": "flagDef",
+    "named": false
+  },
+  {
+    "type": "floating_point_literal",
+    "named": true
+  },
+  {
+    "type": "floating_point_type",
+    "named": true
+  },
+  {
+    "type": "for",
+    "named": false
+  },
+  {
+    "type": "foreach",
+    "named": false
+  },
+  {
+    "type": "hexadecimal_literal",
+    "named": true
+  },
+  {
+    "type": "identifier",
+    "named": true
+  },
+  {
+    "type": "if",
+    "named": false
+  },
+  {
+    "type": "integer_like_reference_type",
+    "named": true
+  },
+  {
+    "type": "integer_type",
+    "named": true
+  },
+  {
+    "type": "internal",
+    "named": false
+  },
+  {
+    "type": "is",
+    "named": false
+  },
+  {
+    "type": "latent",
+    "named": false
+  },
+  {
+    "type": "let_type",
+    "named": true
+  },
+  {
+    "type": "line_comment",
+    "named": true,
+    "extra": true
+  },
+  {
+    "type": "meta",
+    "named": false
+  },
+  {
+    "type": "name_type",
+    "named": true
+  },
+  {
+    "type": "native",
+    "named": false
+  },
+  {
+    "type": "null_literal",
+    "named": true
+  },
+  {
+    "type": "octal_literal",
+    "named": true
+  },
+  {
+    "type": "override",
+    "named": false
+  },
+  {
+    "type": "play",
+    "named": false
+  },
+  {
+    "type": "private",
+    "named": false
+  },
+  {
+    "type": "property",
+    "named": false
+  },
+  {
+    "type": "protected",
+    "named": false
+  },
+  {
+    "type": "random",
+    "named": false
+  },
+  {
+    "type": "readOnly",
+    "named": false
+  },
+  {
+    "type": "replaces",
+    "named": false
+  },
+  {
+    "type": "return",
+    "named": false
+  },
+  {
+    "type": "sizeOf",
+    "named": false
+  },
+  {
+    "type": "state_frames",
+    "named": true
+  },
+  {
+    "type": "state_sprite",
+    "named": true
+  },
+  {
+    "type": "states",
+    "named": false
+  },
+  {
+    "type": "static",
+    "named": false
+  },
+  {
+    "type": "string_like_reference_type",
+    "named": true
+  },
+  {
+    "type": "string_literal",
+    "named": true
+  },
+  {
+    "type": "string_type",
+    "named": true
+  },
+  {
+    "type": "struct",
+    "named": false
+  },
+  {
+    "type": "super",
+    "named": false
+  },
+  {
+    "type": "switch",
+    "named": false
+  },
+  {
+    "type": "transient",
+    "named": false
+  },
+  {
+    "type": "ui",
+    "named": false
+  },
+  {
+    "type": "until",
+    "named": false
+  },
+  {
+    "type": "varArg",
+    "named": false
+  },
+  {
+    "type": "vector_type",
+    "named": true
+  },
+  {
+    "type": "version",
+    "named": false
+  },
+  {
+    "type": "virtual",
+    "named": false
+  },
+  {
+    "type": "virtualScope",
+    "named": false
+  },
+  {
+    "type": "void",
+    "named": false
+  },
+  {
+    "type": "voidPtr",
+    "named": false
+  },
+  {
+    "type": "while",
+    "named": false
+  },
+  {
+    "type": "{",
+    "named": false
+  },
+  {
+    "type": "|",
+    "named": false
+  },
+  {
+    "type": "|=",
+    "named": false
+  },
+  {
+    "type": "||",
+    "named": false
+  },
+  {
+    "type": "}",
+    "named": false
+  },
+  {
+    "type": "~",
+    "named": false
+  },
+  {
+    "type": "~==",
+    "named": false
+  }
+]
