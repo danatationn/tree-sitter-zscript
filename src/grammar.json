@@ -31,8 +31,8 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "version"
+          "type": "SYMBOL",
+          "name": "kw_version"
         },
         {
           "type": "SYMBOL",
@@ -44,8 +44,8 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "#include"
+          "type": "SYMBOL",
+          "name": "kw_include"
         },
         {
           "type": "SYMBOL",
@@ -4813,6 +4813,18 @@
             "value": "/"
           }
         ]
+      }
+    },
+    "kw_include": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "#include",
+          "flags": "i"
+        }
       }
     },
     "kw_const": {

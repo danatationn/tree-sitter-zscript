@@ -2226,9 +2226,13 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "kw_include",
+          "named": true
+        },
         {
           "type": "string_literal",
           "named": true
@@ -4224,9 +4228,13 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "kw_version",
+          "named": true
+        },
         {
           "type": "string_literal",
           "named": true
@@ -4402,10 +4410,6 @@
   },
   {
     "type": "!=",
-    "named": false
-  },
-  {
-    "type": "#include",
     "named": false
   },
   {
@@ -4762,6 +4766,10 @@
     "named": true
   },
   {
+    "type": "kw_include",
+    "named": true
+  },
+  {
     "type": "kw_int",
     "named": true
   },
@@ -5033,10 +5041,6 @@
   {
     "type": "string_type",
     "named": true
-  },
-  {
-    "type": "version",
-    "named": false
   },
   {
     "type": "{",

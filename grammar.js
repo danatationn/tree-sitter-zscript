@@ -37,12 +37,12 @@ export default grammar({
     ),
 
     version_directive: $ => seq(
-      'version',
+      $.kw_version,
       $.string_literal,
     ),
 
     include_directive: $ => seq(
-      '#include',
+      $.kw_include,
       $.string_literal
     ),
 
@@ -492,12 +492,14 @@ export default grammar({
 
     // KEYWORDS //
 
-    kw_const:  $ => token(prec(1, /const/i)),
-    kw_void:   $ => token(prec(1, /void/i)),
-    kw_void_ptr:   $ => token(prec(1, /voidPtr/i)),
-    kw_false:  $ => token(prec(1, /false/i)),
-    kw_true:   $ => token(prec(1, /true/i)),
-    kw_null:   $ => token(prec(1, /null/i)),
+    kw_include: $ => token(prec(1, /#include/i)),
+
+    kw_const:     $ => token(prec(1, /const/i)),
+    kw_void:      $ => token(prec(1, /void/i)),
+    kw_void_ptr:  $ => token(prec(1, /voidPtr/i)),
+    kw_false:     $ => token(prec(1, /false/i)),
+    kw_true:      $ => token(prec(1, /true/i)),
+    kw_null:      $ => token(prec(1, /null/i)),
 
     kw_struct: $ => token(prec(1, /struct/i)),
 
